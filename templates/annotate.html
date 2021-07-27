@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table id="data" class="table table-dark table-hover">
+    <tr>
+        <th>Relation ID</th>
+        <td id="relation-id">123</td>
+    </tr>
+    <tr>
+        <th>Lexical Unit ID 1</th>
+        <td>SOME ID</td>
+    </tr>
+    <tr>
+        <th>Word 1</th>
+        <td>SOME WORD</td>
+    </tr>
+    <tr>
+        <th>Part of Speech 1</th>
+        <td>SOME POS</td>
+    </tr>
+    <tr>
+        <th>FrameNet Definition 1</th>
+        <td>SOME DEFINITION</td>
+    </tr>
+    <tr>
+        <th>Qualia Relation</th>
+        <td>SOME RELATION</td>
+    </tr>
+    <tr>
+        <th>Lexical Unit ID 2</th>
+        <td>SOME ID</td>
+    </tr>
+    <tr>
+        <th>Word 2</th>
+        <td>SOME WORD</td>
+    </tr>
+    <tr>
+        <th>Part of Speech 2</th>
+        <td>SOME POS</td>
+    </tr>
+    <tr>
+        <th>FrameNet Definition 2</th>
+        <td>SOME DEFINITION</td>
+    </tr>
+    <tr>
+        <th>Is relation acceptable</th>
+        <td>
+            <select id="select-annotation" name="annotation" form="submit-form">
+                <option value="empty"></option>
+                <option value="ok">OK</option>
+                <option value="wrong">WRONG</option>
+            </select>
+        </td>
+    </tr>
+        <tr>
+        <th>Submitted</th>
+        <td>NO</td>
+    </tr>
+</table>
+
+<button id="submit-button">Submit</button>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}
