@@ -38,8 +38,13 @@ db.create_all()
 init_data(config["data_path"], db.session, Record)
 
 
-@app.route("/annotate")
+@app.route("/")
 def index():
+    return "WIP"
+
+
+@app.route("/annotate")
+def annotate():
     annotated = set([annotation.record_id for annotation in Annotation.query.all()])
     ids_to_annotate = set([record.record_id for record in Record.query.all()])
     record_id = random.choice(list(ids_to_annotate.difference(annotated)))
@@ -52,17 +57,34 @@ def submit():
     record_id = request.args.get("id", None)
     approved = request.args.get("a", None)
     if not record_id or not approved:
-        return jsonify()
+        return jsonify({
+            "data": {
+                "result": f"Incorrect input",
+                "status": "reject"
+            }
+        })
     else:
         if approved == "ok":
             approved = True
-        else:
+        elif approved == "wrong":
             approved = False
+        else:
+            return jsonify({
+                "data": {
+                    "result": f"No option selected",
+                    "status": "reject"
+                }
+            })
 
         db.session.merge(Annotation(**{"record_id": record_id, "approved": approved}))
         db.session.commit()
 
-        return jsonify({"result": f"Annotation for record {record_id} stored successfully"})
+        return jsonify({
+            "data": {
+                "result": f"Annotation for record `{record_id}` stored successfully",
+                "status": "ok"
+            }
+        })
 
 
 if __name__ == '__main__':
