@@ -1,0 +1,3 @@
+db_path: "sqlite:///db.sqlite"
+data_path: "resources/qualia_relations.csv"
+track_modifications: false

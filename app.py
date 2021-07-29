@@ -1,12 +1,17 @@
 import random
 
-import pandas as pd
 from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from yaml import safe_load
+
+from utils import init_data
+
+with open("config.yml") as file:
+    config = safe_load(file)
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = config["db_path"]
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = config["track_modifications"]
 db = SQLAlchemy(app)
 
 
@@ -30,32 +35,10 @@ class Record(db.Model):
 
 db.create_all()
 
-data = pd.read_csv("resources/qualia_relations.csv")
-data.columns = ['record_id',
-                'id_lu_1',
-                'word_1',
-                'pos_1',
-                'fn_definition_1',
-                'relation',
-                'id_lu_2',
-                'word_2',
-                'pos_2',
-                'fn_definition_2']
+init_data(config["data_path"], db.session, Record)
 
 
-def load_from_df(df: pd.DataFrame, session, model):
-    model.query.delete()
-    records = []
-    for row in df.iterrows():
-        records.append(Record(**row[1].to_dict()))
-    session.add_all(records)
-    session.commit()
-
-
-load_from_df(data, db.session, Record)
-
-
-@app.route("/")
+@app.route("/annotate")
 def index():
     annotated = set([annotation.record_id for annotation in Annotation.query.all()])
     ids_to_annotate = set([record.record_id for record in Record.query.all()])
@@ -68,15 +51,18 @@ def index():
 def submit():
     record_id = request.args.get("id", None)
     approved = request.args.get("a", None)
-    if approved == "ok":
-        approved = True
+    if not record_id or not approved:
+        return jsonify()
     else:
-        approved = False
+        if approved == "ok":
+            approved = True
+        else:
+            approved = False
 
-    db.session.merge(Annotation(**{"record_id": record_id, "approved": approved}))
-    db.session.commit()
+        db.session.merge(Annotation(**{"record_id": record_id, "approved": approved}))
+        db.session.commit()
 
-    return jsonify({"a": f"all good {record_id} {approved}"})
+        return jsonify({"result": f"Annotation for record {record_id} stored successfully"})
 
 
 if __name__ == '__main__':
