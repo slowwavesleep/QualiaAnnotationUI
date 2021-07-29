@@ -8,15 +8,21 @@ window.addEventListener("DOMContentLoaded", function () {
 
 
         let url = `/annotate/submit?id=${encodeURIComponent(relationId)}&a=${encodeURIComponent(selectionValue)}`
-        // console.log(url);
-        // console.log(selectionValue);
-        // console.log(relationId);
 
         fetchAsync(url)
 
-        // console.log(data)
+    })
 
-
+    document.getElementById("reload").addEventListener("click", function () {
+        let isSubmitted = document.getElementById("is-submitted").innerText === "Yes"
+        if (!isSubmitted) {
+            let reaction = confirm("You haven't submitted a label for this relation. Continue anyway?")
+            if (reaction) {
+                window.location.reload(true)
+            }
+        } else {
+            window.location.reload(true)
+        }
 
     })
 })
@@ -29,7 +35,6 @@ async function fetchAsync (url) {
       isSubmitted.innerText = "Yes"
   }
   window.alert(json.data.result)
-  console.log(json.data)
 }
 
 
