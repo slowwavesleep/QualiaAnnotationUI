@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from yaml import safe_load
 
-from utils import init_data
+from utils import init_data, delete_all
 
 with open("config.yml") as file:
     config = safe_load(file)
@@ -13,6 +13,11 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = config["db_path"]
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = config["track_modifications"]
 db = SQLAlchemy(app)
+
+
+class LaunchedFlag(db.Model):
+    flag_id = db.Column(db.Integer, primary_key=True)
+    flag = db.Column(db.Boolean, unique=True)
 
 
 class Annotation(db.Model):
@@ -35,11 +40,47 @@ class Record(db.Model):
 
 db.create_all()
 
-init_data(config["data_path"], db.session, Record)
+
+def set_launched_flag():
+    db.session.add(LaunchedFlag(**{"flag_id": 0, "flag": True}))
+    db.session.commit()
+
+
+def reload_data():
+    delete_all([Record, Annotation, LaunchedFlag])
+    init_data(config["data_path"], db.session, Record)
+
+
+first_launch = LaunchedFlag.query.first() is None
+
+
+if first_launch:
+    reload_data()
+    set_launched_flag()
 
 
 @app.route("/")
 def index():
+    return "WIP"
+
+
+@app.route("/annotations")
+def view_annotations():
+    return "WIP"
+
+
+@app.route("/data")
+def view_data():
+    return "WIP"
+
+
+@app.route("/annotations/export")
+def export():
+    return "WIP"
+
+
+@app.route("/data/reset")
+def reset():
     return "WIP"
 
 

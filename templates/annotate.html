@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<table id="data" class="table table-dark table-hover">
+<table id="data" class="table table-hover">
     <tr>
         <th>Relation ID</th>
         <td id="relation-id">{{ record.record_id }}</td>
@@ -12,7 +12,11 @@
     </tr>
     <tr>
         <th>Word 1</th>
-        <td>{{ record.word_1 }}</td>
+        <td>
+            <strong>
+            {{ record.word_1 }}
+            </strong>
+        </td>
     </tr>
     <tr>
         <th>Part of Speech 1</th>
@@ -20,7 +24,11 @@
     </tr>
     <tr>
         <th>FrameNet Definition 1</th>
-        <td>{{ record.fn_definition_1 }}</td>
+        <td>
+            <em>
+            {{ record.fn_definition_1 }}
+            </em>
+        </td>
     </tr>
     <tr>
         <th>Qualia Relation</th>
@@ -32,7 +40,11 @@
     </tr>
     <tr>
         <th>Word 2</th>
-        <td>{{ record.word_2 }}</td>
+        <td>
+            <strong>
+            {{ record.word_2 }}
+            </strong>
+        </td>
     </tr>
     <tr>
         <th>Part of Speech 2</th>
@@ -40,7 +52,11 @@
     </tr>
     <tr>
         <th>FrameNet Definition 2</th>
-        <td>{{ record.fn_definition_2 }}</td>
+        <td>
+            <em>
+            {{ record.fn_definition_2 }}
+            </em>
+        </td>
     </tr>
     <tr>
         <th>Is relation acceptable</th>
@@ -57,9 +73,9 @@
         <td id="is-submitted">No</td>
     </tr>
 </table>
-
-<button id="submit-button">Submit</button>
-<button id="reload">Next relation</button>
-
+<div class="d-grid gap-2 col-6 mx-auto">
+    <button id="submit-button" class="btn btn-dark">Submit</button>
+    <button id="reload" class="btn btn-dark">Next relation</button>
+</div>
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 {% endblock %}

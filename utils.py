@@ -23,3 +23,8 @@ def init_data(path, session, model):
                     'pos_2',
                     'fn_definition_2']
     load_from_df(data, session, model)
+
+
+def delete_all(models: list):
+    for model in models:
+        model.query.delete()
