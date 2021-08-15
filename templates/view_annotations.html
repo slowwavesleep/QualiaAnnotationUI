@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <table id="data" class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Accepted</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for annotation in annotations %}
+        <tr>
+          <td>{{ annotation.record_id }}</td>
+          <td>{{ annotation.approved }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    $(document).ready(function () {
+      $('#data').DataTable();
+    });
+  </script>
+{% endblock %}

@@ -66,7 +66,8 @@ def index():
 
 @app.route("/annotations")
 def view_annotations():
-    return "WIP"
+    annotations = Annotation.query
+    return render_template("view_annotations.html", annotations=annotations)
 
 
 @app.route("/data")
