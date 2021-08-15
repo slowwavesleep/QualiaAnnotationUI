@@ -5,6 +5,11 @@
     <thead>
       <tr>
         <th>ID</th>
+        <th>Head Word</th>
+        <th>Head Definition</th>
+        <th>Relation</th>
+        <th>Tail Word</th>
+        <th>Tail Definition</th>
         <th>Accepted</th>
       </tr>
     </thead>
@@ -12,6 +17,11 @@
       {% for annotation in annotations %}
         <tr>
           <td>{{ annotation.record_id }}</td>
+          <td>{{ annotation.word_1 }}</td>
+          <td>{{ annotation.fn_definition_1 }}</td>
+          <td>{{ annotation.relation }}</td>
+          <td>{{ annotation.word_2 }}</td>
+          <td>{{ annotation.fn_definition_2 }}</td>
           <td>{{ annotation.approved }}</td>
         </tr>
       {% endfor %}

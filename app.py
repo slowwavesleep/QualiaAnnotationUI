@@ -66,7 +66,15 @@ def index():
 
 @app.route("/annotations")
 def view_annotations():
-    annotations = Annotation.query
+    annotations = Annotation.query\
+        .join(Record, Annotation.record_id == Record.record_id)\
+        .add_columns(Record.record_id,
+                     Record.word_1,
+                     Record.fn_definition_1,
+                     Record.relation,
+                     Record.word_2,
+                     Record.fn_definition_2,
+                     Annotation.approved)
     return render_template("view_annotations.html", annotations=annotations)
 
 
@@ -74,6 +82,7 @@ def view_annotations():
 def view_data():
     records = Record.query
     return render_template("view_records.html", records=records)
+
 
 @app.route("/annotations/export")
 def export():
