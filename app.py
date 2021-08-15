@@ -1,8 +1,9 @@
 import random
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_file
 from flask_sqlalchemy import SQLAlchemy
 from yaml import safe_load
+import pandas as pd
 
 from utils import init_data, delete_all
 
@@ -13,6 +14,9 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = config["db_path"]
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = config["track_modifications"]
 db = SQLAlchemy(app)
+
+resources_path = config["resources_path"]
+downloadable = config["downloadable"]
 
 
 class LaunchedFlag(db.Model):
@@ -101,6 +105,18 @@ def annotate():
     record_id = random.choice(list(ids_to_annotate.difference(annotated)))
     record = Record.query.filter(Record.record_id == record_id).first()
     return render_template("annotate.html", record=record)
+
+
+@app.route("/download/<file_name>")
+def download(file_name):
+    if file_name not in downloadable:
+        return "File not found"
+    if file_name == "annotations":
+        print()
+        return "None"
+    else:
+        file_path = f"{resources_path}/qualia_relations.csv"
+        return send_file(file_path, as_attachment=True, download_name=f"{file_name}.csv")
 
 
 @app.route("/annotate/submit")
