@@ -7,9 +7,31 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.css">
   </head>
   <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item {% if page_name == 'Index' %} active {% endif %}">
+              <a class="nav-link{% if page_name == 'Index' %} active {% endif %}" aria-current="page" href="/">Index</a>
+            </li>
+            <li class="nav-item {% if page_name == 'Annotate' %} active {% endif %}">
+              <a class="nav-link {% if page_name == 'Annotate' %} active {% endif %}" href="/annotate">Annotate</a>
+            </li>
+            <li class="nav-item {% if page_name == 'Annotated' %} active {% endif %}">
+              <a class="nav-link {% if page_name == 'Annotated' %} active {% endif %}" href="/annotations">View Annotations</a>
+            </li>
+            <li class="nav-item {% if page_name == 'Relations' %} active {% endif %}">
+              <a class="nav-link {% if page_name == 'Relations' %} active {% endif %}" href="/data">View Relations</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
     <div class="container">
-      <h1>{{ title }}</h1>
-      <hr>
       {% block content %}{% endblock %}
     </div>
     <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

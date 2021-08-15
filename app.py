@@ -66,7 +66,7 @@ if first_launch:
 
 @app.route("/")
 def index():
-    return "WIP"
+    return render_template("index.html", title="Index", page_name="Index")
 
 
 @app.route("/annotations")
@@ -80,17 +80,25 @@ def view_annotations():
                      Record.word_2,
                      Record.fn_definition_2,
                      Annotation.approved)
-    return render_template("view_annotations.html", annotations=annotations)
+    return render_template("view_annotations.html",
+                           title="Annotated",
+                           page_name="Annotated",
+                           annotations=annotations)
 
 
 @app.route("/data")
 def view_data():
     records = Record.query
-    return render_template("view_records.html", records=records)
+    return render_template("view_records.html", title="Relations", page_name="Relations", records=records)
 
 
 @app.route("/data/reset")
-def reset():
+def reset_all():
+    return "WIP"
+
+
+@app.route("/annotations/reset")
+def reset_annotations():
     return "WIP"
 
 
@@ -100,7 +108,7 @@ def annotate():
     ids_to_annotate = set([record.record_id for record in Record.query.all()])
     record_id = random.choice(list(ids_to_annotate.difference(annotated)))
     record = Record.query.filter(Record.record_id == record_id).first()
-    return render_template("annotate.html", record=record)
+    return render_template("annotate.html", title="Annotate", record=record)
 
 
 @app.route("/download/<file_name>")
