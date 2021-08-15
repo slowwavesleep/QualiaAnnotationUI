@@ -3,55 +3,41 @@
 {% block content %}
 <table id="data" class="table table-hover">
     <tr>
-        <th>Relation ID</th>
-        <td id="relation-id">{{ record.record_id }}</td>
+        <th>Role</th>
+        <td><strong>Head</strong></td>
+        <td><strong>Tail</strong></td>
     </tr>
     <tr>
-        <th>Lexical Unit ID 1</th>
+        <th>Lexical Unit ID</th>
         <td>{{ record.id_lu_1 }}</td>
+        <td>{{ record.id_lu_2 }}</td>
     </tr>
     <tr>
-        <th>Word 1</th>
+        <th>Word</th>
         <td>
             <strong>
             {{ record.word_1 }}
             </strong>
         </td>
-    </tr>
-    <tr>
-        <th>Part of Speech 1</th>
-        <td>{{ record.pos_1 }}</td>
-    </tr>
-    <tr>
-        <th>FrameNet Definition 1</th>
-        <td>
-            <em>
-            {{ record.fn_definition_1 }}
-            </em>
-        </td>
-    </tr>
-    <tr>
-        <th>Qualia Relation</th>
-        <td>{{ record.relation }}</td>
-    </tr>
-    <tr>
-        <th>Lexical Unit ID 2</th>
-        <td>{{ record.id_lu_2 }}</td>
-    </tr>
-    <tr>
-        <th>Word 2</th>
         <td>
             <strong>
             {{ record.word_2 }}
             </strong>
         </td>
+
     </tr>
     <tr>
-        <th>Part of Speech 2</th>
+        <th>Part of Speech</th>
+        <td>{{ record.pos_1 }}</td>
         <td>{{ record.pos_2 }}</td>
     </tr>
     <tr>
-        <th>FrameNet Definition 2</th>
+        <th>FrameNet Definition</th>
+        <td>
+            <em>
+            {{ record.fn_definition_1 }}
+            </em>
+        </td>
         <td>
             <em>
             {{ record.fn_definition_2 }}
@@ -59,8 +45,16 @@
         </td>
     </tr>
     <tr>
+        <th>Relation ID</th>
+        <td id="relation-id" colspan="2">{{ record.record_id }}</td>
+    </tr>
+    <tr>
+        <th>Qualia Relation</th>
+        <td colspan="2"><strong>{{ record.relation }}</strong></td>
+    </tr>
+    <tr>
         <th>Is relation acceptable</th>
-        <td>
+        <td colspan="2">
             <select id="select-annotation" name="annotation">
                 <option value="empty"></option>
                 <option value="ok">OK</option>
@@ -70,7 +64,7 @@
     </tr>
         <tr>
         <th>Submitted</th>
-        <td id="is-submitted">No</td>
+        <td id="is-submitted" colspan="2">No</td>
     </tr>
 </table>
 <div class="d-grid gap-2 col-6 mx-auto">
