@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <table id="data" class="table table-striped">
+    <thead>
+      <tr>
+            <th>Relation ID</th>
+            <th>Head LU ID</th>
+            <th>Head Word</th>
+            <th>Head POS</th>
+            <th>Head Definition</th>
+            <th>Relation</th>
+            <th>Tail LU ID</th>
+            <th>Tail Word</th>
+            <th>Tail POS</th>
+            <th>Tail Definition</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for record in records %}
+        <tr>
+            <td>{{ record.record_id }}</td>
+            <td>{{ record.id_lu_1 }}</td>
+            <td>{{ record.word_1 }}</td>
+            <td>{{ record.pos_1 }}</td>
+            <td>{{ record.fn_definition_1 }}</td>
+            <td>{{ record.relation }}</td>
+            <td>{{ record.id_lu_2 }}</td>
+            <td>{{ record.word_2 }}</td>
+            <td>{{ record.pos_2 }}</td>
+            <td>{{ record.fn_definition_2 }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/load_tables.js') }}"></script>
+{% endblock %}

@@ -72,8 +72,8 @@ def view_annotations():
 
 @app.route("/data")
 def view_data():
-    return "WIP"
-
+    records = Record.query
+    return render_template("view_records.html", records=records)
 
 @app.route("/annotations/export")
 def export():

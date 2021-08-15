@@ -20,9 +20,5 @@
 {% endblock %}
 
 {% block scripts %}
-  <script>
-    $(document).ready(function () {
-      $('#data').DataTable();
-    });
-  </script>
+<script src="{{ url_for('static', filename='js/load_tables.js') }}"></script>
 {% endblock %}
