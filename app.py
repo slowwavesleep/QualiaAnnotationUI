@@ -1,4 +1,5 @@
 import random
+from io import BytesIO
 
 from flask import Flask, render_template, request, jsonify, send_file
 from flask_sqlalchemy import SQLAlchemy
@@ -88,11 +89,6 @@ def view_data():
     return render_template("view_records.html", records=records)
 
 
-@app.route("/annotations/export")
-def export():
-    return "WIP"
-
-
 @app.route("/data/reset")
 def reset():
     return "WIP"
@@ -112,8 +108,13 @@ def download(file_name):
     if file_name not in downloadable:
         return "File not found"
     if file_name == "annotations":
-        print()
-        return "None"
+        cur_data = pd.DataFrame.from_records(Annotation.query.with_entities(Annotation.record_id,
+                                                                            Annotation.approved).all(),
+                                             columns=["record_id", "approved"])
+        bytes_io = BytesIO()
+        cur_data.to_csv(bytes_io, index=False)
+        bytes_io.seek(0)
+        return send_file(bytes_io, as_attachment=True, download_name=f"{file_name}.csv")
     else:
         file_path = f"{resources_path}/qualia_relations.csv"
         return send_file(file_path, as_attachment=True, download_name=f"{file_name}.csv")
