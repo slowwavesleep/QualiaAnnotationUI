@@ -1,14 +1,38 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Annotation Tool</h1>
-<div>Description</div>
+<h2>Welcome to the Qualia Annotation Tool!</h2>
+<div  class="container">
+    <div>
+        The purpose of this tool is to judge whether a given relation between two FrameNet lexical units automatically
+        extracted from an external source is feasible from the human point of view.
+    </div>
+
+    <div>
+        The annotation tool provides the following functionality:
+        <ul>
+            <li><a href="/annotate">Annotate a random example</a></li>
+            <li><a href="/annotations">View annotations made so far</a></li>
+            <li><a href="/data">View all available examples</a></li>
+        </ul>
+        In addition, clicking on a relation ID in table view will bring to the annotation screen for that specific
+        relation.
+    </div>
+    <div>
+        <strong>NB:</strong> Currently, &lt; Head, Relation, Tail &gt; should be interpreted the following way:
+        Head's `relation type` is Tail. For example,
+        Head = banquet, Relation = hypernym, Tail = dinner means that
+        <em>banquet</em>'s <strong>hypernym</strong> is <em>dinner</em>.
+    </div>
+</div>
 <div class="container">
-    <h4>Downloads</h4>
+    <h2>Downloads</h2>
+    <div>Utilizing the buttons below it is possible download current data and annotations.</div>
     <div class="btn-group" role="group">
       <a href="/download/annotations" type="button" class="btn btn-outline-dark">Download Annotations</a>
       <a href="/download/data" type="button" class="btn btn-outline-dark">Download Relations</a>
     </div>
-    <h4>Manage Data</h4>
+    <h2>Manage Data</h2>
+    <div>It is also possible to start the annotation process from the beginning.</div>
     <div class="btn-group" role="group">
       <a type="button" class="btn btn-outline-dark" id="reset-all">Reset All Data</a>
       <a type="button" class="btn btn-outline-dark" id="reset-annotations">Reset Annotations</a>

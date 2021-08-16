@@ -119,7 +119,7 @@ def reset_annotations():
     reset_annotations_data()
     return jsonify({
         "data": {
-            "result": "Annotations reset successfully",
+            "result": "Annotations have been reset successfully",
             "status": "ok"
         }
     })
