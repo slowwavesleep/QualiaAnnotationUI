@@ -18,6 +18,7 @@ db = SQLAlchemy(app)
 
 resources_path = config["resources_path"]
 downloadable = config["downloadable"]
+debug_mode = config["debug"]
 
 
 class LaunchedFlag(db.Model):
@@ -132,6 +133,13 @@ def annotate():
     return render_template("annotate.html", title="Annotate", record=record)
 
 
+@app.route("/annotate/<annotation_id>")
+def annotate_id(annotation_id):
+    record_id = int(annotation_id)
+    record = Record.query.filter(Record.record_id == record_id).first()
+    return render_template("annotate.html", title="Annotate", record=record)
+
+
 @app.route("/download/<file_name>")
 def download(file_name):
     if file_name not in downloadable:
@@ -185,4 +193,4 @@ def submit():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=debug_mode)

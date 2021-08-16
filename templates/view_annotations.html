@@ -16,7 +16,7 @@
     <tbody>
       {% for annotation in annotations %}
         <tr>
-          <td>{{ annotation.record_id }}</td>
+          <td><a href="/annotate/{{ annotation.record_id }}">{{ annotation.record_id }}</a></td>
           <td>{{ annotation.word_1 }}</td>
           <td>{{ annotation.fn_definition_1 }}</td>
           <td>{{ annotation.relation }}</td>

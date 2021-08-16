@@ -19,7 +19,7 @@
     <tbody>
       {% for record in records %}
         <tr>
-            <td>{{ record.record_id }}</td>
+            <td><a href="/annotate/{{ record.record_id }}">{{ record.record_id }}</a></td>
             <td>{{ record.id_lu_1 }}</td>
             <td>{{ record.word_1 }}</td>
             <td>{{ record.pos_1 }}</td>

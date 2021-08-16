@@ -19,12 +19,12 @@ window.addEventListener("DOMContentLoaded", function () {
         if (!isSubmitted) {
             let reaction = confirm("You haven't submitted a label for this relation. Continue anyway?")
             if (reaction) {
-                window.location.reload(true)
+                window.location = "/annotate"
             } else {
                 subEl.className += "table-warning"
             }
         } else {
-            window.location.reload(true)
+            window.location = "/annotate"
         }
 
     })

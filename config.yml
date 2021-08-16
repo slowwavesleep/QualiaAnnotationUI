@@ -5,3 +5,4 @@ resources_path: "./resources"
 downloadable:
   - annotations
   - data
+debug: true
