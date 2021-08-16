@@ -9,11 +9,12 @@
       <a href="/download/data" type="button" class="btn btn-outline-dark">Download Relations</a>
     </div>
     <h4>Manage Data</h4>
-<!--    <div class="btn-group" role="group">-->
-<!--      <a href="/reset/data" type="button" class="btn btn-outline-dark" id="reset-all">Reset All Data</a>-->
-<!--      <a href="/download/data" type="button" class="btn btn-outline-dark">Reset Annotations</a>-->
-<!--    </div>-->
+    <div class="btn-group" role="group">
+      <a type="button" class="btn btn-outline-dark" id="reset-all">Reset All Data</a>
+      <a type="button" class="btn btn-outline-dark" id="reset-annotations">Reset Annotations</a>
+    </div>
 </div>
 {% endblock %}
 {% block scripts %}
+<script src="{{ url_for('static', filename='js/manage.js') }}"></script>
 {% endblock %}

@@ -56,12 +56,21 @@ def reload_data():
     init_data(config["data_path"], db.session, Record)
 
 
+def reset_annotations_data():
+    delete_all([Annotation])
+    db.session.commit()
+
+
+def fresh_init():
+    reload_data()
+    set_launched_flag()
+
+
 first_launch = LaunchedFlag.query.first() is None
 
 
 if first_launch:
-    reload_data()
-    set_launched_flag()
+    fresh_init()
 
 
 @app.route("/")
@@ -94,12 +103,24 @@ def view_data():
 
 @app.route("/data/reset")
 def reset_all():
-    return "WIP"
+    fresh_init()
+    return jsonify({
+        "data": {
+            "result": "Data reinitialized successfully",
+            "status": "ok"
+        }
+    })
 
 
 @app.route("/annotations/reset")
 def reset_annotations():
-    return "WIP"
+    reset_annotations_data()
+    return jsonify({
+        "data": {
+            "result": "Annotations reset successfully",
+            "status": "ok"
+        }
+    })
 
 
 @app.route("/annotate")
