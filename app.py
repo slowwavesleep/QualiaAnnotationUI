@@ -19,7 +19,6 @@ db = SQLAlchemy(app)
 resources_path = config["resources_path"]
 downloadable = config["downloadable"]
 debug_mode = config["debug"]
-map_qualia = None
 
 
 class LaunchedFlag(db.Model):
