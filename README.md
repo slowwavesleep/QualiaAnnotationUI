@@ -1,6 +1,9 @@
 # QualiaAnnotationUI
 A flask-based prototype UI for annotation of qualia relations between FrameNet Lexical Units inferred from an external knowledge base
 
+![image](https://user-images.githubusercontent.com/44175589/129951197-606d8a53-3db3-4f4e-b69c-e8758d9a8c62.png)
+
+
 ## How to install and run
 
 Clone the repository `cd` to it.
