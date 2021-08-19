@@ -18,7 +18,7 @@ cd QualiaAnnotationUI
 Create and activate a virtual environment for the project. I suggest using Anaconda.
 
 ```
-conda env --n qualia python=3.7
+conda env -n qualia python=3.7
 ```
 ```
 conda activate qualia
